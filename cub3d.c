@@ -14,5 +14,9 @@
 
 int	main(void)
 {
-	printf("cube3d\n");
+	t_game	game;
+
+	game.mlx = mlx_init();
+	game.mlx_win = mlx_new_window (game.mlx, 800, 600, "test");
+	mlx_loop(game.mlx);
 }

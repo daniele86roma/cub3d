@@ -30,10 +30,10 @@
 //get_next_line
 # include "get_next_line/get_next_line.h"
 
-// risoluzione
-# define SCREEN_W 640
-# define SCREEN_H 480
-
+// risoluzione e nome
+# define SCREEN_W 800
+# define SCREEN_H 600
+# define NAME "CUBE3D"
 // Field Of View
 # define FOV 0.66
 
@@ -44,21 +44,12 @@
 # define MOVSPEED 0.1
 # define ROTSPEED 0.05
 
-/*// framebuffer
-typedef struct s_frame
+// display e dati di gioco
+typedef struct s_game
 {
-	uint32_t		width;
-	uint32_t		height;
-	TrueColorPixel	*data;
-}	t_frame;*/
-
-// mappa
-typedef struct s_world
-{
-	uint32_t	width;
-	uint32_t	height;
-	uint8_t		*data;
-}	t_world;
+	void		*mlx;
+	void		*mlx_win;
+}	t_game;
 
 // stato della telecamera (posizione, direzione, piano di proiezione)
 typedef struct s_state

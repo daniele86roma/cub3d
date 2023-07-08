@@ -14,23 +14,23 @@ NAME	= cub3d
 FLAGS	=  -Wall -Wextra -Werror
 CC		= gcc ${FLAGS}
 RM		= rm -f
-SRC		= cub3d.c ${GNL}
-GNL		= get_next_line/get_next_line.c get_next_line/get_next_line_utils.c
+SRC		= $(wildcard *.c)  $(wildcard get_next_line/*.c)
 OBJ		= ${SRC:.c=.o}
 LFT		= libft/libft.a
-MLX		= minilibx-linux/libmlx.a
+MLB		= minilibx-linux/libmlx.a
+MLX		= -L ./minilibx-linux -lmlx -L/usr/lib -lXext -lX11 -lm -lz
 
 all: ${NAME}
 
 ${LFT}:
 		make -C libft
-${MLX}:
+${MLB}:
 		make -C minilibx-linux
 .o:.c
 	${CC} ${OBJ} -c $< -o ${<:.c=.o}
 
-${NAME}: ${OBJ} ${LFT} ${MLX} 
-	${CC} ${OBJ} ${LFT} ${MLX} -o ${NAME}
+${NAME}: ${OBJ} ${LFT} ${MLB}
+	${CC} ${OBJ} ${LFT} ${MLB} $(MLX) -o ${NAME}
 
 clean:
 	${RM} ${OBJ}
