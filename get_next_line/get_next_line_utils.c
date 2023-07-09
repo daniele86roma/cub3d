@@ -98,21 +98,3 @@ char	*ft_strncpy(char *s, int n)
 	s2[i] = 0;
 	return (s2);
 }
-
-void	ft_strncpyfrom(char *s, int n)
-{
-	int	i;
-	int	j;
-
-	i = n;
-	j = 0;
-	if (!s)
-		return ;
-	while (s[++i])
-	{
-		s[j] = s[i];
-		j++;
-	}
-	s[j] = 0;
-	return ;
-}

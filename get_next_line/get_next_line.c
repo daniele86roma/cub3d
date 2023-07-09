@@ -12,25 +12,51 @@
 
 #include "get_next_line.h"
 
+void	ft_strncpyfrom(char *s, int n)
+{
+	int	i;
+	int	j;
+
+	i = n;
+	j = 0;
+	if (!s)
+		return ;
+	while (s[++i])
+	{
+		s[j] = s[i];
+		j++;
+	}
+	s[j] = 0;
+	return ;
+}
+
+char	*get(char *buf, int fd, int *rd)
+{
+	char		*line;
+	char		*tmp;
+
+	*rd = 1;
+	line = ft_strdup2(buf);
+	while (ft_strchr2(line, '\n') == -1 && *rd != 0)
+	{
+		*rd = read(fd, (void *)buf, BUFFER_SIZE);
+		buf[*rd] = 0;
+		tmp = line;
+		line = ft_strjoin2(tmp, buf);
+		free(tmp);
+	}
+	return (line);
+}
+
 char	*get_next_line(int fd)
 {
 	int			rd;
 	static char	buf[BUFFER_SIZE];
 	char		*line;
-	char		*tmp;
 
-	rd = 1;
 	if (BUFFER_SIZE <= 0 || fd < 0)
 		return (0);
-	line = ft_strdup2(buf);
-	while (ft_strchr2(line, '\n') == -1 && rd != 0)
-	{
-		rd = read(fd, (void *)buf, BUFFER_SIZE);
-		buf[rd] = 0;
-		tmp = line;
-		line = ft_strjoin2(tmp, buf);
-		free(tmp);
-	}
+	line = get(buf, fd, &rd);
 	if (rd == 0)
 	{
 		if (!line)
