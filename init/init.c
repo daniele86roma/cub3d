@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   cub3d.c                                            :+:      :+:    :+:   */
+/*   init.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: dfiliagg <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -10,38 +10,14 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub3d.h"
+#include "../cub3d.h"
 
-typedef struct s_vars {
-	void	*mlx;
-	void	*win;
-}				t_vars;
-
-int	key_hook(int keycode, t_vars *vars)
+void	init(t_game *game)
 {
-	(void)vars;
-	printf("Hello from key_hook! %d\n", keycode);
-	return (0);
-}
-
-int	close_game(t_game *game)
-{
-	free_game(game);
-	exit(0);
-}
-
-
-int	main(int argc, char **argv)
-{
-	t_game	game;
-	t_vars	vars;
-
-	(void)argc;
-	(void)argv;
-	init(&game);
-	mlx_hook(game.mlx_win, 17, 0, close_game, &game);
-	mlx_key_hook(game.mlx_win, key_hook, &vars);
-	mlx_clear_window(game.mlx, game.mlx_win);
-	draw_sky_floor(&game);
-	mlx_loop(game.mlx);
+	game->mlx = mlx_init();
+	game->mlx_win = mlx_new_window (game->mlx, 800, 600, NAME);
+	game->image.img = mlx_new_image(game->mlx, SCREEN_W, SCREEN_H);
+	game->image.addr = mlx_get_data_addr(game->image.img,
+			&game->image.bits_per_pixel, &game->image.line_length,
+			&game->image.endian);
 }
