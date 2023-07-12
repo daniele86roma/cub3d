@@ -41,7 +41,6 @@ void	draw_line_on(t_data *img, t_point begin, t_point end, int color)
 	}
 }
 
-
 void	my_mlx_pixel_put(t_data *img, int x, int y, int color)
 {
 	char	*dst;
@@ -68,7 +67,7 @@ void	draw_line(t_game *game, t_point begin, t_point end, int color)
 	py = (int)begin.y;
 	while (pixels)
 	{
-		my_mlx_pixel_put(&game->image, px, py, color);
+		mlx_pixel_put(game->mlx, game->mlx_win, px, py, color);
 		px += dx;
 		py += dy;
 		--pixels;

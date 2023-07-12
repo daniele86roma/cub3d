@@ -43,6 +43,15 @@
 # define MOVSPEED 0.1
 # define ROTSPEED 0.05
 
+typedef struct s_textures {
+	char	*nord;
+	char	*sud;
+	char	*ovest;
+	char	*est;
+	int		floor[3];
+	int		sky[3];
+}	t_textures;
+
 typedef struct s_data {
 	void	*img;
 	char	*addr;
@@ -54,9 +63,10 @@ typedef struct s_data {
 // display e dati di gioco
 typedef struct s_game
 {
-	void	*mlx;
-	void	*mlx_win;
-	t_data	image;
+	void		*mlx;
+	void		*mlx_win;
+	t_textures	tex;
+	t_data		image;
 }	t_game;
 
 // stato della telecamera (posizione, direzione, piano di proiezione)

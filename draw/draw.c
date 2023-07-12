@@ -25,13 +25,17 @@ void	draw_sky_floor(t_game *game)
 	{
 		begin.y = y;
 		end.y = y;
-		draw_line(game, begin, end, 255);
+		draw_line_on(&game->image, begin, end, create_trgb(0,
+				game->tex.sky[0], game->tex.sky[1],
+				game->tex.sky[2]));
 	}
 	y -= 1;
 	while (++y < SCREEN_H)
 	{
 		begin.y = y;
 		end.y = y;
-		draw_line_on(&game->image, begin, end, create_trgb(0, 133, 94, 66));
+		draw_line_on(&game->image, begin, end, create_trgb(0,
+				game->tex.floor[0], game->tex.floor[1],
+				game->tex.floor[2]));
 	}
 }
